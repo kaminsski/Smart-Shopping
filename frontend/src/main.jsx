@@ -5,13 +5,13 @@ import './index.css'
 import MainLayout from './Layouts/MainLayout.jsx'
 import  { BrowserRouter } from "react-router-dom"
 import CartProvider from './Providers/CartProvider.jsx'
-
+import { Layout } from './Layouts/Layout'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <CartProvider>
-    <MainLayout>
+    <Layout>
     <App />
-    </MainLayout>
+    </Layout>
     </CartProvider>
     </BrowserRouter>
   ,

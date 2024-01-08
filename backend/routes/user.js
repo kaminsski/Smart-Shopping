@@ -4,7 +4,7 @@ const User = require('../models/User.js');
 const bcrypt  = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { auth } = require('../middleware/authMid.js');
-
+const validator = require('validator');
 
 router.get("/", async(req,res)=>{
     try {
@@ -54,22 +54,43 @@ router.delete("/:id", async(req, res)=>{
 
 })
 
-router.post("/register", async(req, res)=>{
+router.post('/register', async (req, res) => {
     try {
-        const {username, email, password} = req.body
-        const hashed = await bcrypt.hash(password, 10)
-        const newUser = new User({username, email, 
-            password: hashed
-        })
-        await newUser.save() 
-        const token = createToken(newUser._id);
-        res.status(200).json({ token, newUser });
+      const { username, email, password } = req.body;
+  
+      // Validate username
+      if (!validator.isLength(username, { min: 3 })) {
+        return res.status(400).json({ message: 'Username must be at least 3 characters long' });
+      }
+  
+      // Validate email
+      if (!validator.isEmail(email)) {
+        return res.status(400).json({ message: 'Please enter a valid email address' });
+      }
+  
+      // Validate password
+      if (!validator.isLength(password, { min: 6 })) {
+        return res.status(400).json({ message: 'Password must be at least 6 characters long' });
+      }
+  
+      // Check if the username or email already exists
+      const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+      if (existingUser) {
+        return res.status(400).json({ message: 'Username or email already exists' });
+      }
+  
+      const hashed = await bcrypt.hash(password, 10);
+      const newUser = new User({ username, email, password: hashed });
+      await newUser.save();
+  
+      const token = createToken(newUser._id);
+      res.status(200).json({ token, newUser });
     } catch (error) {
-        console.log(error)
-        res.send("not oke")
+      console.log(error);
+      res.status(500).send('Internal Server Error');
     }
-
-})
+  });
+  
 
 router.post("/login", async(req, res)=>{
     try {
@@ -78,13 +99,13 @@ router.post("/login", async(req, res)=>{
         const user = await User.findOne({ username });
     
         if (!user) {
-          return res.status(401).json({ message: 'Invalid username or password' });
+          return res.status(400).json({ message: 'Invalid username or password' });
         }
     
         const passwordMatch = await bcrypt.compare(password, user.password);
     
         if (!passwordMatch) {
-          return res.status(401).json({ message: 'Invalid username or password' });
+          return res.status(400).json({ message: 'Invalid username or password' });
         }
         
         if (user) {

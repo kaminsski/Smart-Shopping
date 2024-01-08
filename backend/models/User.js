@@ -19,7 +19,7 @@ const UserScheme = mongoose.Schema(
         password: { type: String, required: true },
         role: { type: String, default: "user", enum: ["user", "admin"] },
         cart: [ProductSchema], // Array of embedded Product subdocuments
-        balance: { type: String, default: 100 },
+        balance: { type: Number, default: 100 },
         total: { type: Number, default: 0 },
         orders: [Object], // Array of embedded Product subdocuments
     },

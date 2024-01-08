@@ -17,7 +17,7 @@ export default function Slider() {
   return (
     <div className="relative flex flex-col items-center">
       <img
-        className="w-full ease-in duration-500"
+        className="w-full h-96 ease-in duration-500 object-cover"
         src={`/images/s${img}.jpg`}
         alt=""
       />

@@ -40,14 +40,18 @@ export default function Products() {
   
 
   return (
-    <div className=''>
-      <h2 className=' text-4xl font-bold text-center my-5'>Products</h2>
-      {loader && (<div className="flex justify-center h-80 lds-circle items-center"><div></div></div>)}
-      <div className="productsContainer flex flex-wrap m-auto justify-center gap-10">
-        {products.map((product)=>
-            <ProductItem key={product._id} product={product}></ProductItem> 
-        )}
+    <div className='bg-gray-100'>
+      <h2 className='text-4xl font-bold text-center my-5'>Products</h2>
+      {loader && (
+        <div className="flex justify-center h-80 lds-circle items-center">
+          <div></div>
+        </div>
+      )}
+      <div className="productsContainer flex flex-wrap m-auto justify-around gap-1">
+        {products.map((product) => (
+          <ProductItem key={product._id} product={product}></ProductItem>
+        ))}
       </div>
     </div>
-  )
+  );
 }

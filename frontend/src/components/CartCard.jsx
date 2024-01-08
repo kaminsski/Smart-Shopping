@@ -39,11 +39,11 @@ export default function CartCard() {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row w-screen h-full px-14 py-7">
+      <div className="bg-gray-300 flex flex-col md:flex-row w-screen h-full px-7 py-7 min-h-screen">
         <div className="w-full flex flex-col h-fit gap-4 p-4 ">
           <p className="text-blue-900 text-xl font-extrabold">My cart</p>
 
-          <div className="flex flex-col p-4 text-lg font-semibold shadow-md border rounded-sm">
+          <div className="bg-gray-100 flex flex-col p-4 text-lg font-semibold shadow-md border rounded-sm">
             {user &&
               user.cart &&
               user.cart.map((cartItem, id) => (
@@ -90,7 +90,7 @@ export default function CartCard() {
           <p className="text-blue-900 text-xl font-extrabold">
             Purchase Resume
           </p>
-          <div className="flex flex-col p-4 gap-4 text-lg font-semibold shadow-md border rounded-sm">
+          <div className="bg-gray-100 flex flex-col p-4 gap-4 text-lg font-semibold shadow-md border rounded-sm">
             {errorMessage && (
               <div className="text-red-500 text-center">{errorMessage}</div>
             )}

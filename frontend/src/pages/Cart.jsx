@@ -1,12 +1,19 @@
 import React from 'react'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import CartCard from '../components/CartCard'
 
+import CartCard from '../components/CartCard'
+const getRole = () =>{
+  const user = JSON.parse(localStorage.getItem("user"))
+  return user ? user.role : null
+}
 export default function Cart() {
-  return (
-    <>
-      <CartCard></CartCard>
-    </>
-  )
+  const userRole = getRole()
+  if(userRole){
+    return (
+      <>
+     <CartCard></CartCard>
+      </>
+    )
+  }else{
+   return(window.location.href="/") 
+  }
 }

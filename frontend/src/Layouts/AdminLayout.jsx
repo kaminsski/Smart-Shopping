@@ -1,9 +1,27 @@
 import React from 'react'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import { useNavigate } from 'react-router-dom'
 
-export default function AdminLayout() {
-  return (
-    <div>
+const getRole = () =>{
+  const user = JSON.parse(localStorage.getItem("user"))
+  return user ? user.role : null
+}
+
+export default function AdminLayout(props) {
+  const userRole = getRole()
+  const navigate = useNavigate()
+  if(userRole === "admin"){
+    return (
+      <>
       
-    </div>
-  )
+      <Header></Header>
+       {props.children}
+      <Footer></Footer>
+      </>
+    )
+  }else{
+   return(window.location.href="/") 
+  }
+  
 }

@@ -7,6 +7,7 @@ import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import { useEffect } from "react";
 import axios from "axios";
+import Admin from "./pages/Admin";
 
 function App() {
 
@@ -19,6 +20,9 @@ function App() {
         <Route path="/cart" element={<Cart></Cart>}></Route>
         <Route path="/register" element={<Register></Register>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
+        <Route path="/admin" element={<Admin></Admin>}></Route>
+
+
       </Routes>
     </>
   );
