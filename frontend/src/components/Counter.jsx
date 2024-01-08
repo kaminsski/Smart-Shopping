@@ -62,26 +62,25 @@ export default function Counter({ productId }) {
 };
 
 
-
-  return (
-    <>
-      <div className="counter flex bg-blue-400 w-1/3 justify-center m-auto">
-        <div onClick={()=>reduceQuantity(productId)} className="left px-3">
-          <i className="fa-solid fa-minus"></i>
-        </div>
-        <div className="middle">
-          <input
-            style={{ width: "30px" }}
-            className="px-2"
-            type="text"
-            value={quantity}
-            readOnly
-          />
-        </div>
-        <div onClick={() => increaseQuantity(productId)} className="right px-3">
-          <i className="fa-solid fa-plus"></i>
-        </div>
+return (
+  <>
+    <div className="counter flex w-full sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 justify-center m-auto">
+      <button onClick={() => reduceQuantity(productId)} className="left px-3 bg-blue-400">
+        <i className="fa-solid fa-minus"></i>
+      </button>
+      <div className="middle">
+        <input
+          style={{ width: "30px" }}
+          className="px-2"
+          type="text"
+          value={quantity}
+          readOnly
+        />
       </div>
-    </>
-  );
+      <button onClick={() => increaseQuantity(productId)} className="right px-3 bg-blue-400">
+        <i className="fa-solid fa-plus"></i>
+      </button>
+    </div>
+  </>
+);
 }
