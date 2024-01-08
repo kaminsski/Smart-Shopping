@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../Providers/CartProvider";
 
@@ -10,8 +10,10 @@ export default function Header() {
   const logout = () => {
     localStorage.removeItem("jwt");
     localStorage.removeItem("user");
-    navigate("/");
+    return(window.location.href="/login")
   };
+
+
 
 
   return (
@@ -28,7 +30,7 @@ export default function Header() {
             </div>
           </Link>
 
-          <div className="rightNav flex items-center text-lg gap-3">
+          <div className="rightNav flex items-center text-lg bg-white rounded-lg">
             <div
               onClick={()=>{setDropdownVisible(!dropdownVisible)}}
             
@@ -62,11 +64,11 @@ export default function Header() {
                 </div>
               )}
             </div>
-            <span className="text-5xl text-white mb-2">|</span>
+            <span className="text-5xl text-black mb-2">|</span>
             <div className="cartContainer bg-white p-3 rounded-xl">
               <Link to="/cart">
                 <i className="fa-solid fa-cart-shopping"></i>
-                {user.total}
+                {user.total}₺
               </Link>
             </div>
           </div>
